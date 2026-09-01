@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Case educacional de uma página de vendas para Facebook Ads.">
+  <title>Case Educacional | Modelo de Página de Vendas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-red: #e53935;
+      --brand-yellow: #fff176;
+      --brand-green: #66bb6a;
+      --brand-green-hover: #4caf50;
+      --brand-purple: #7e57c2;
+      --text: #1a1a1a;
+      --muted: #4b5563;
+      --light: #f9fafb;
+      --line: #e5e7eb;
+      --white: #ffffff;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, .05);
+      --shadow-md: 0 8px 16px rgba(0, 0, 0, .10);
+      --shadow-xl: 0 20px 30px rgba(0, 0, 0, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      overflow-x: hidden;
+      background: var(--white);
+      color: var(--text);
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    button, a { font: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .notice {
+      width: 100%;
+      padding: 8px 16px;
+      background: var(--brand-red);
+      color: var(--white);
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .notice strong { color: var(--brand-yellow); font-weight: 800; }
+
+    .container {
+      width: 100%;
+      max-width: 672px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .hero {
+      padding: 32px 0;
+      text-align: center;
+    }
+    .case-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 6px 12px;
+      border: 1px solid #fecaca;
+      border-radius: 999px;
+      background: #fff1f1;
+      color: var(--brand-red);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 16px;
+      color: #111827;
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .hero-copy {
+      margin-bottom: 32px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.625;
+    }
+
+    .video-shell {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      background: #111827;
+      box-shadow: 0 10px 30px rgba(17, 24, 39, .20);
+    }
+    .video-placeholder {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 50% 38%, rgba(102, 187, 106, .22), transparent 34%),
+        linear-gradient(145deg, #111827, #1f2937);
+      text-align: center;
+    }
+    .play {
+      display: grid;
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 20px;
+      place-items: center;
+      border: 2px solid rgba(255, 255, 255, .8);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .14);
+      font-size: 30px;
+      line-height: 1;
+    }
+    .video-placeholder strong { display: block; font-size: 18px; }
+    .video-placeholder small { display: block; margin-top: 8px; color: #d1d5db; }
+
+    .primary-button {
+      display: flex;
+      width: 100%;
+      min-height: 83px;
+      margin-top: 16px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 24px 16px;
+      border: 1px solid var(--white);
+      border-radius: 16px;
+      background: var(--brand-green);
+      box-shadow: var(--shadow-md);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.25;
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .primary-button:hover { background: var(--brand-green-hover); transform: scale(1.02); }
+    .primary-button:focus-visible { outline: 3px solid rgba(126, 87, 194, .35); outline-offset: 3px; }
+
+    .section { padding: 48px 0; }
+    .section-title {
+      margin-bottom: 32px;
+      color: #111827;
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .benefit-list, .bonus-list { display: grid; gap: 24px; }
+    .benefit {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px;
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+    .benefit-icon {
+      display: grid;
+      flex: 0 0 48px;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--icon-bg);
+      color: var(--accent);
+      font-size: 23px;
+    }
+    .benefit h3 { margin-bottom: 2px; color: #111827; font-size: 18px; font-weight: 700; }
+    .benefit p { margin-bottom: 0; color: var(--muted); font-size: 14px; }
+
+    .bonus-card {
+      position: relative;
+      overflow: hidden;
+      padding: 24px;
+      border: 2px solid var(--brand-green);
+      border-radius: 24px;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+    .free-badge {
+      position: absolute;
+      z-index: 2;
+      top: 16px;
+      right: 16px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--brand-green);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .image-placeholder {
+      display: grid;
+      width: 100%;
+      min-height: 220px;
+      margin-bottom: 24px;
+      place-items: center;
+      border: 1px solid #f3f4f6;
+      border-radius: 16px;
+      background: #f9fafb;
+      color: #9ca3af;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .bonus-card h3 { margin-bottom: 16px; color: #111827; font-size: 20px; font-weight: 700; }
+    .bonus-card > p { max-width: 384px; margin: 0 auto 16px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .old-price { color: #ef4444; font-size: 14px; text-decoration: line-through; }
+    .free-price { margin-bottom: 0; color: var(--brand-green); font-weight: 700; }
+
+    .offer { padding: 32px 0; }
+    .offer-box {
+      max-width: 384px;
+      margin: 0 auto;
+      padding: 24px;
+      overflow: hidden;
+      border: 2px solid var(--brand-green);
+      border-radius: 24px;
+      background: var(--white);
+      box-shadow: var(--shadow-xl);
+    }
+    .offer-image {
+      display: grid;
+      min-height: 112px;
+      margin: 0 auto 24px;
+      place-items: center;
+      border-radius: 14px;
+      background: #f9fafb;
+      color: #9ca3af;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .offer h3 { margin-bottom: 16px; text-align: center; text-transform: uppercase; }
+    .price-label { margin-bottom: 2px; color: var(--muted); font-size: 14px; text-align: center; }
+    .price-before { margin-bottom: 0; color: #9ca3af; text-align: center; text-decoration: line-through; }
+    .price-now { margin: 0 0 24px; color: var(--brand-green); font-size: 56px; line-height: 1.15; text-align: center; }
+    .check-list { display: grid; gap: 18px; margin: 0 0 24px; padding: 0; list-style: none; }
+    .check-list li { display: flex; align-items: center; gap: 12px; font-size: 15px; text-transform: uppercase; }
+    .check {
+      display: grid;
+      flex: 0 0 32px;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--brand-green);
+      color: var(--white);
+      font-weight: 800;
+    }
+    .buy-button { min-height: 78px; margin-top: 0; border-radius: 12px; font-size: 18px; text-transform: none; }
+    .delivery-note {
+      display: flex;
+      max-width: 384px;
+      margin: 28px auto 0;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      border: 2px solid var(--brand-green);
+      border-radius: 16px;
+      font-size: 14px;
+    }
+
+    .testimonials { margin-top: 32px; padding: 40px 24px; background: var(--light); }
+    .slider {
+      display: grid;
+      grid-template-columns: 44px 1fr 44px;
+      align-items: center;
+      gap: 12px;
+    }
+    .slider-button {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      background: #e5e7eb;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 28px;
+    }
+    .testimonial-placeholder {
+      display: grid;
+      min-height: 170px;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      color: #9ca3af;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; }
+    .dot.active { width: 16px; border-radius: 999px; background: var(--brand-green); }
+
+    .faq { display: grid; gap: 0; padding: 24px 32px; border-radius: 24px; background: var(--light); box-shadow: var(--shadow-sm); }
+    .faq details { border-bottom: 1px solid var(--line); }
+    .faq details:last-child { border-bottom: 0; }
+    .faq summary { padding: 22px 0; cursor: pointer; font-size: 14px; font-weight: 500; list-style: none; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "⌄"; float: right; font-size: 18px; }
+    .faq details[open] summary::after { content: "⌃"; }
+    .faq p { padding: 0 0 22px; margin-bottom: 0; color: var(--muted); font-size: 14px; }
+
+    footer {
+      padding: 32px 0 64px;
+      background: var(--white);
+      text-align: center;
+    }
+    .footer-case {
+      display: inline-block;
+      margin-bottom: 24px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #fff1f1;
+      color: var(--brand-red);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    footer h3 { margin-bottom: 12px; font-size: 18px; }
+    footer p { max-width: 520px; margin: 0 auto; color: #9ca3af; font-size: 12px; line-height: 1.7; }
+    .toast {
+      position: fixed;
+      z-index: 30;
+      right: 16px;
+      bottom: 16px;
+      max-width: calc(100% - 32px);
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: #111827;
+      color: white;
+      box-shadow: var(--shadow-xl);
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: .2s ease;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 30px; }
+      .hero-copy { font-size: 16px; }
+      .section-title { font-size: 27px; }
+      .primary-button { min-height: 74px; padding: 22px 14px; font-size: 17px; }
+      .benefit { padding: 20px; }
+      .benefit-icon { flex-basis: 44px; width: 44px; height: 44px; }
+      .image-placeholder { min-height: 180px; }
+      .price-now { font-size: 50px; }
+      .faq { padding: 16px 22px; }
+      .testimonials { padding: 36px 14px; }
+      .slider { grid-template-columns: 38px 1fr 38px; gap: 8px; }
+      .slider-button { width: 38px; height: 38px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="notice">⚡ <strong>CASE EDUCACIONAL</strong> — MODELO DE COPY PARA FACEBOOK ADS</div>
+
+  <main class="container">
+    <header class="hero">
+      <span class="case-tag">Exemplo para alunos</span>
+      <h1>[PROMESSA PRINCIPAL DO PRODUTO]</h1>
+      <p class="hero-copy">Uma frase curta que explica para quem é o produto, qual problema ele resolve e qual resultado entrega.</p>
+
+      <div class="video-shell" aria-label="Espaço reservado para vídeo vertical">
+        <div class="video-placeholder">
+          <div>
+            <div class="play" aria-hidden="true">▶</div>
+            <strong>ESPAÇO PARA O VÍDEO</strong>
+            <small>Formato vertical 9:16</small>
+          </div>
+        </div>
+      </div>
+
+      <a class="primary-button" href="#oferta"><span>👉</span> [CHAMADA PRINCIPAL]</a>
+    </header>
+
+    <section class="section" aria-labelledby="receber">
+      <h2 class="section-title" id="receber">O Que Você Vai Receber</h2>
+      <div class="benefit-list">
+        <article class="benefit" style="--accent:#7e57c2;--icon-bg:#f3e8ff">
+          <div class="benefit-icon" aria-hidden="true">▣</div>
+          <div><h3>[Benefício Principal]</h3><p>Descreva em uma frase curta o principal material ou resultado entregue.</p></div>
+        </article>
+        <article class="benefit" style="--accent:#eab308;--icon-bg:#fef9c3">
+          <div class="benefit-icon" aria-hidden="true">▤</div>
+          <div><h3>[Facilidade de Uso]</h3><p>Explique de forma simples como o cliente poderá utilizar o produto.</p></div>
+        </article>
+        <article class="benefit" style="--accent:#66bb6a;--icon-bg:#dcfce7">
+          <div class="benefit-icon" aria-hidden="true">✓</div>
+          <div><h3>[Acesso ou Garantia]</h3><p>Informe o tipo de acesso, atualização ou segurança oferecida na compra.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="bonus">
+      <h2 class="section-title" id="bonus">E ainda você recebe 5 Bônus Grátis:</h2>
+      <div class="bonus-list">
+        <article class="bonus-card"><span class="free-badge">Grátis</span><div class="image-placeholder">Aqui vai uma imagem</div><h3>[Nome do Bônus 1]</h3><p>Uma descrição curta mostrando por que este bônus é útil para o cliente.</p><span class="old-price">Valor Original: R$ 00,00</span><p class="free-price">Hoje: R$ 0,00</p></article>
+        <article class="bonus-card"><span class="free-badge">Grátis</span><div class="image-placeholder">Aqui vai uma imagem</div><h3>[Nome do Bônus 2]</h3><p>Uma descrição curta mostrando por que este bônus é útil para o cliente.</p><span class="old-price">Valor Original: R$ 00,00</span><p class="free-price">Hoje: R$ 0,00</p></article>
+        <article class="bonus-card"><span class="free-badge">Grátis</span><div class="image-placeholder">Aqui vai uma imagem</div><h3>[Nome do Bônus 3]</h3><p>Uma descrição curta mostrando por que este bônus é útil para o cliente.</p><span class="old-price">Valor Original: R$ 00,00</span><p class="free-price">Hoje: R$ 0,00</p></article>
+        <article class="bonus-card"><span class="free-badge">Grátis</span><div class="image-placeholder">Aqui vai uma imagem</div><h3>[Nome do Bônus 4]</h3><p>Uma descrição curta mostrando por que este bônus é útil para o cliente.</p><span class="old-price">Valor Original: R$ 00,00</span><p class="free-price">Hoje: R$ 0,00</p></article>
+        <article class="bonus-card"><span class="free-badge">Grátis</span><div class="image-placeholder">Aqui vai uma imagem</div><h3>[Nome do Bônus 5]</h3><p>Uma descrição curta mostrando por que este bônus é útil para o cliente.</p><span class="old-price">Valor Original: R$ 00,00</span><p class="free-price">Hoje: R$ 0,00</p></article>
+      </div>
+    </section>
+
+    <section class="offer" id="oferta" aria-labelledby="oferta-title">
+      <div class="offer-box">
+        <div class="offer-image">Aqui vai a imagem do produto</div>
+        <h3 id="oferta-title">[Nome do Produto]</h3>
+        <p class="price-label">De R$ 00,00 por apenas:</p>
+        <p class="price-before">R$ 00,00</p>
+        <p class="price-now">R$ 00,00</p>
+        <ul class="check-list">
+          <li><span class="check">✓</span> Produto principal</li>
+          <li><span class="check">✓</span> Bônus exclusivo 1</li>
+          <li><span class="check">✓</span> Bônus exclusivo 2</li>
+          <li><span class="check">✓</span> Bônus exclusivo 3</li>
+          <li><span class="check">✓</span> Suporte</li>
+          <li><span class="check">✓</span> Garantia de 7 dias</li>
+          <li><span class="check">✓</span> Acesso imediato</li>
+        </ul>
+        <button class="primary-button buy-button demo-button" type="button"><span>👉</span> Comprar agora</button>
+      </div>
+      <div class="delivery-note"><span class="check">✉</span><span>Após a compra, o cliente recebe aqui a explicação sobre a forma de acesso.</span></div>
+    </section>
+
+    <section class="testimonials" aria-labelledby="depoimentos">
+      <h2 class="section-title" id="depoimentos">Quem comprou, adorou!</h2>
+      <div class="slider">
+        <button class="slider-button" id="prev" type="button" aria-label="Depoimento anterior">‹</button>
+        <div class="testimonial-placeholder" id="testimonial">Aqui vai o depoimento 1</div>
+        <button class="slider-button" id="next" type="button" aria-label="Próximo depoimento">›</button>
+      </div>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+    </section>
+
+    <section class="section" aria-labelledby="perguntas">
+      <h2 class="section-title" id="perguntas">Perguntas Frequentes</h2>
+      <div class="faq">
+        <details><summary>Como vou receber o produto?</summary><p>[Explique aqui, de forma direta, como acontece a entrega.]</p></details>
+        <details><summary>Preciso ter algum conhecimento prévio?</summary><p>[Informe aqui se o produto exige experiência, ferramenta ou equipamento.]</p></details>
+        <details><summary>O que está incluído?</summary><p>[Resuma aqui os principais itens do pacote.]</p></details>
+        <details><summary>Quais formas de pagamento são aceitas?</summary><p>[Liste aqui as formas de pagamento disponíveis no checkout.]</p></details>
+        <details><summary>Tem garantia?</summary><p>[Explique aqui o prazo e as condições da garantia.]</p></details>
+      </div>
+      <a class="primary-button" href="#oferta"><span>👉</span> Quero aproveitar a oferta agora</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span class="footer-case">Case educacional • Não é uma oferta real</span>
+      <h3>Modelo de página de vendas para Facebook Ads</h3>
+      <p>Esta página foi criada exclusivamente como exemplo de estrutura, design e organização de copy. Os nomes, preços, botões e informações exibidos são demonstrativos.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status">Este botão é apenas demonstrativo e não abre um checkout.</div>
+
+  <script>
+    const slides = [1, 2, 3, 4];
+    let currentSlide = 0;
+    const testimonial = document.getElementById('testimonial');
+    const dots = document.getElementById('dots');
+    const renderSlide = () => {
+      testimonial.textContent = `Aqui vai o depoimento ${slides[currentSlide]}`;
+      dots.innerHTML = slides.map((_, index) => `<span class="dot ${index === currentSlide ? 'active' : ''}"></span>`).join('');
+    };
+    document.getElementById('prev').addEventListener('click', () => {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      renderSlide();
+    });
+    document.getElementById('next').addEventListener('click', () => {
+      currentSlide = (currentSlide + 1) % slides.length;
+      renderSlide();
+    });
+    renderSlide();
+
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    document.querySelectorAll('.demo-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+      });
+    });
+  </script>
+</body>
+</html>
